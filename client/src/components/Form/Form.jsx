@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import useStyles from "./styles";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 
 const Form = () => {
   const classes = useStyles();
 
+  const [postData, setPostData] = useState({
+    creator: "",
+    title: "",
+    message: "",
+    tags: "",
+    seletedFile: "",
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted");
@@ -17,7 +24,49 @@ const Form = () => {
           noValidate
           className={classes.form}
           onSubmit={handleSubmit}
-        ></form>
+        >
+          <Typography variant="h6">Creating a Memory</Typography>
+          <TextField
+            name="creator"
+            variant="outlined"
+            label="Creator"
+            fullWidth
+            value={postData.creator}
+            onChange={(e) =>
+              setPostData({ ...postData, creator: e.target.value })
+            }
+          />
+          <TextField
+            name="title"
+            variant="outlined"
+            label="Creator"
+            fullWidth
+            value={postData.creator}
+            onChange={(e) =>
+              setPostData({ ...postData, creator: e.target.value })
+            }
+          />
+          <TextField
+            name="message"
+            variant="outlined"
+            label="Creator"
+            fullWidth
+            value={postData.creator}
+            onChange={(e) =>
+              setPostData({ ...postData, creator: e.target.value })
+            }
+          />
+          <TextField
+            name="tags"
+            variant="outlined"
+            label="Creator"
+            fullWidth
+            value={postData.creator}
+            onChange={(e) =>
+              setPostData({ ...postData, creator: e.target.value })
+            }
+          />
+        </form>
       </Paper>
     </>
   );
