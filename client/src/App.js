@@ -8,6 +8,7 @@ import useStyles from "./styles";
 
 function App() {
   const classes = useStyles();
+  const disptach = useDispatch();
 
   return (
     <Container maxWidth="lg">
