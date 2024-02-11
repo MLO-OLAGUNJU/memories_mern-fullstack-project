@@ -4,10 +4,20 @@ import { TextField, Button, Typography, Paper } from "@material-ui/core";
 
 const Form = () => {
   const classes = useStyles();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted");
+  };
   return (
     <>
       <Paper className={classes.paper}>
-        <form autoComplete="off"></form>
+        <form
+          autoComplete="off"
+          noValidate
+          className={classes.form}
+          onSubmit={handleSubmit}
+        ></form>
       </Paper>
     </>
   );
