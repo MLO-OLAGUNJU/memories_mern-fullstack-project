@@ -6,7 +6,9 @@ const Form = () => {
   const classes = useStyles();
   return (
     <>
-      <h1>FORM</h1>
+      <Paper className={classes.paper}>
+        <form autoComplete="off"></form>
+      </Paper>
     </>
   );
 };
