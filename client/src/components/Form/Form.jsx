@@ -39,7 +39,7 @@ const Form = () => {
           <TextField
             name="title"
             variant="outlined"
-            label="Creator"
+            label="Title"
             fullWidth
             value={postData.creator}
             onChange={(e) =>
@@ -49,7 +49,7 @@ const Form = () => {
           <TextField
             name="message"
             variant="outlined"
-            label="Creator"
+            label="Message"
             fullWidth
             value={postData.creator}
             onChange={(e) =>
@@ -59,7 +59,7 @@ const Form = () => {
           <TextField
             name="tags"
             variant="outlined"
-            label="Creator"
+            label="Tags"
             fullWidth
             value={postData.creator}
             onChange={(e) =>
