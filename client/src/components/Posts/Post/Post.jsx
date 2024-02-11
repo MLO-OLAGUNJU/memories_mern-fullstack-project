@@ -38,7 +38,14 @@ const Post = ({ post }) => {
         <div className={classes.details}>
         <Typograghy variant="body2" color="textSecondary">{post.tags.map((tag)=> `#${tag} `)}</Typograghy>
         </div>
+        <CardContent>
         <Typograghy className={classes.title} variant="h5" gutterBottom>{post.message}</Typograghy>
+        </CardContent>
+        <CardActions className={classes.cardActions}>
+          <Button size="small" color="primary" onClick={()=> }>
+            <ThumbUpAltIcon/>
+          </Button>
+        </CardActions>
       </Card>
     </>
   );
