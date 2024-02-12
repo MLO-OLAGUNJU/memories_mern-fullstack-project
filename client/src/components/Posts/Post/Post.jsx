@@ -12,7 +12,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { MdMoreHoriz } from "react-icons/md";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../../actions/posts";
+import { deletePost, likePost } from "../../../actions/posts";
 
 import useStyles from "./styles";
 
@@ -57,10 +57,13 @@ const Post = ({ post, setCurrentId }) => {
           </Typography>
         </CardContent>
         <CardActions className={classes.cardActions}>
-          <Button size="small" color="primary" onClick={() => {}}>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => dispatch(likePost(post._id))}
+          >
             <FaRegThumbsUp fontSize="small" />
-            Like0
-            {post.LikeCount}
+            Like {post.likeCount}
           </Button>
           <Button
             size="small"
