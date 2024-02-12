@@ -55,7 +55,9 @@ const Form = ({ currentId, setCurrentId }) => {
           noValidate
           onSubmit={handleSubmit}
         >
-          <Typography variant="h6">Creating a Memory</Typography>
+          <Typography variant="h6">
+            ${currentId ? "Editing" : "Creating"} a Memory
+          </Typography>
           <TextField
             name="creator"
             variant="outlined"
