@@ -8,14 +8,14 @@ import Form from "./components/Form/Form";
 import Posts from "./components/Posts/Posts";
 import useStyles from "./styles";
 
-function App() {
-  const [currentId, setCurrentId] = useState(null);
+const App = () => {
+  const [currentId, setCurrentId] = useState(0);
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const disptach = useDispatch();
 
   useEffect(() => {
-    disptach(getPosts());
-  }, [disptach]);
+    dispatch(getPosts());
+  }, [currentId, dispatch]);
 
   return (
     <Container maxWidth="lg">
@@ -23,18 +23,13 @@ function App() {
         <Typography className={classes.heading} variant="h2" align="center">
           Memories
         </Typography>
-        <img
-          className={classes.image}
-          src={memories}
-          alt="memories"
-          height="60"
-        />
+        <img className={classes.image} src={memories} alt="icon" height="60" />
       </AppBar>
       <Grow in>
         <Container>
           <Grid
             container
-            justifyContent="space-between"
+            justify="space-between"
             alignItems="stretch"
             spacing={3}
           >
@@ -49,6 +44,6 @@ function App() {
       </Grow>
     </Container>
   );
-}
+};
 
 export default App;
