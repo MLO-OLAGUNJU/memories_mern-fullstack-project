@@ -15,18 +15,18 @@ import { useDispatch } from "react-redux";
 
 import useStyles from "./styles";
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
 
   return (
     <>
-      <Card className={classes.Card}>
+      <Card className={classes.card}>
         <CardMedia
           className={classes.media}
           image={post.selectedFile}
           title={post.title}
         />
-        <div>
+        <div className={classes.overlay}>
           <Typography variant="h6">{post.creator}</Typography>
           <Typography variant="body2">
             {moment(post.createdAt).fromNow()}
@@ -35,7 +35,8 @@ const Post = ({ post }) => {
         <div className={classes.overlay2}>
           <Button
             style={{ color: "white" }}
-            size="small"  onClick={()=>{} }
+            size="small"
+            onClick={() => setCurrentId(post._id)}
           >
             <MdMoreHoriz fontSize="default" />
           </Button>
@@ -53,7 +54,7 @@ const Post = ({ post }) => {
         <CardActions className={classes.cardActions}>
           <Button size="small" color="primary" onClick={() => {}}>
             <FaRegThumbsUp fontSize="small" />
-            Like
+            Like0
             {post.LikeCount}
           </Button>
           <Button size="small" color="primary" onClick={() => {}}>
