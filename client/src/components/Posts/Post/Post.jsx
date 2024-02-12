@@ -1,17 +1,19 @@
 import React from "react";
-import useStyles from "./styles";
 import {
   Card,
   CardActions,
   CardContent,
   CardMedia,
   Button,
-  Typograghy,
-} from "@material-ui/core";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbsUpAl";
-import DeleteIcon from "@material-ui/icons/Delete";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+  Typography,
+} from "@material-ui/core/";
+import { FaRegThumbsUp } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
+import { MdMoreHoriz } from "react-icons/md";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+
+import useStyles from "./styles";
 
 const Post = ({ post }) => {
   const classes = useStyles();
@@ -25,25 +27,38 @@ const Post = ({ post }) => {
           title={post.title}
         />
         <div>
-          <Typograghy variant="h6">{post.creator}</Typograghy>
-          <Typograghy variant="body2">
+          <Typography variant="h6">{post.creator}</Typography>
+          <Typography variant="body2">
             {moment(post.createdAt).fromNow()}
-          </Typograghy>
+          </Typography>
         </div>
         <div className={classes.overlay2}>
-          <Button style={{color: 'white'}} size="small" onClick={()=> }>
-            <MoreHorizIcon fontSize="default"/>
+          <Button
+            style={{ color: "white" }}
+            size="small"  onClick={()=>{} }
+          >
+            <MdMoreHoriz fontSize="default" />
           </Button>
         </div>
         <div className={classes.details}>
-        <Typograghy variant="body2" color="textSecondary">{post.tags.map((tag)=> `#${tag} `)}</Typograghy>
+          <Typography variant="body2" color="textSecondary">
+            {post.tags.map((tag) => `#${tag} `)}
+          </Typography>
         </div>
         <CardContent>
-        <Typograghy className={classes.title} variant="h5" gutterBottom>{post.message}</Typograghy>
+          <Typography className={classes.title} variant="h5" gutterBottom>
+            {post.message}
+          </Typography>
         </CardContent>
         <CardActions className={classes.cardActions}>
-          <Button size="small" color="primary" onClick={()=> }>
-            <ThumbUpAltIcon/>
+          <Button size="small" color="primary" onClick={() => {}}>
+            <FaRegThumbsUp fontSize="small" />
+            Like
+            {post.LikeCount}
+          </Button>
+          <Button size="small" color="primary" onClick={() => {}}>
+            <MdDeleteForever fontSize="small" />
+            Delete
           </Button>
         </CardActions>
       </Card>
