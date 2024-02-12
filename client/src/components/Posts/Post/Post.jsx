@@ -12,11 +12,13 @@ import { MdDeleteForever } from "react-icons/md";
 import { MdMoreHoriz } from "react-icons/md";
 import moment from "moment";
 import { useDispatch } from "react-redux";
+import { deletePost } from "../../../actions/posts";
 
 import useStyles from "./styles";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -60,7 +62,11 @@ const Post = ({ post, setCurrentId }) => {
             Like0
             {post.LikeCount}
           </Button>
-          <Button size="small" color="primary" onClick={() => {}}>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => dispatch(deletePost(post._id))}
+          >
             <MdDeleteForever fontSize="small" />
             Delete
           </Button>
