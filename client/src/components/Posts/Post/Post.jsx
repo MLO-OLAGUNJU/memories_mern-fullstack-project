@@ -62,8 +62,8 @@ const Post = ({ post, setCurrentId }) => {
             color="primary"
             onClick={() => dispatch(likePost(post._id))}
           >
-            <FaRegThumbsUp fontSize="small" />
-            Like {post.likeCount}
+            <FaRegThumbsUp fontSize="small" /> &nbsp; Like &nbsp;
+            {post.likeCount}
           </Button>
           <Button
             size="small"
@@ -71,7 +71,7 @@ const Post = ({ post, setCurrentId }) => {
             onClick={() => dispatch(deletePost(post._id))}
           >
             <MdDeleteForever fontSize="small" />
-            Delete
+            &nbsp;Delete
           </Button>
         </CardActions>
       </Card>
