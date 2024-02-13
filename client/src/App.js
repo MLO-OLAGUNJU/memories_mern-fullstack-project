@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import  useStyles  from "./styles";
+import useStyles from "./styles";
 import { getPosts } from "./actions/posts";
 import Form from "./components/Form/Form";
 import Posts from "./components/Posts/Posts";
+import NavBar from "./components/NavBar/NavBar";
 
 const App = () => {
   const [currentId, setCurrentId] = useState(0);
@@ -17,6 +18,7 @@ const App = () => {
 
   return (
     <Container maxWidth="lg">
+      <NavBar />
       <Grow in>
         <Container>
           <Grid
