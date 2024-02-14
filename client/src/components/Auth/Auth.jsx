@@ -8,7 +8,7 @@ import {
   Container,
 } from "@material-ui/core";
 import useStyles from "./styles";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { MdLockOutline } from "react-icons/md";
 
 const Auth = () => {
   const classes = useStyles();
@@ -21,7 +21,7 @@ const Auth = () => {
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <MdLockOutline />
         </Avatar>
         <Typography variant="h5">{isSignup ? "Sign Up" : "Sign In"}</Typography>
         <form className={classes.form} onSubmit={HandleSubmit}>
