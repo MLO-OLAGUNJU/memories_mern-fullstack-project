@@ -15,6 +15,7 @@ const Auth = () => {
   const isSignup = false;
 
   const HandleSubmit = () => {};
+  const handleChange = () => {};
 
   return (
     <Container component="main" maxWidth="xs">
@@ -27,11 +28,22 @@ const Auth = () => {
           <Grid container spacing={2}>
             {isSignup && (
               <>
+                <Grid xs={6} md={12}>
+                  <TextField
+                    name="firstName"
+                    label="First Name"
+                    handleChange={handleChange}
+                    autoFocus
+                    xs={6}
+                  />
+                </Grid>
                 <TextField
-                  name="firstName"
-                  label="First Name"
+                  name="lastName"
+                  label="Last Name"
                   handleChange={handleChange}
-                ></TextField>
+                  autoFocus
+                  xs={6}
+                />
               </>
             )}
           </Grid>
