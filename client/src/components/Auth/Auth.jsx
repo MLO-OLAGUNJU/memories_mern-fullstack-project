@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Button,
@@ -11,10 +11,13 @@ import useStyles from "./styles";
 import { MdLockOutline } from "react-icons/md";
 
 import Input from "./Input";
+import { useState } from "react";
 
 const Auth = () => {
   const classes = useStyles();
   const isSignup = false;
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const HandleSubmit = () => {};
   const handleChange = () => {};
