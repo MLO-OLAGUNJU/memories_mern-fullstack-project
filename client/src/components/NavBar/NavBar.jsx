@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AppBar, Typography, Toolbar, Avatar, Button } from "@material-ui/core";
-import { Link, BrowserRouter as Router } from "react-router-dom"; // Import BrowserRouter
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import jwt_decode from "jwt-decode";
 
@@ -81,15 +81,4 @@ const Navbar = () => {
   );
 };
 
-const App = () => {
-  return (
-    <Router>
-      {" "}
-      {/* Wrap your components with Router */}
-      <Navbar />
-      {/* Other components */}
-    </Router>
-  );
-};
-
-export default App;
+export default Navbar;
