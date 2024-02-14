@@ -9,13 +9,20 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 import { MdLockOutline } from "react-icons/md";
-// import { GoogleLogin } from "react-google-login";
 import Input from "./Input";
 import Icon from "./icon";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -24,12 +31,21 @@ const Auth = () => {
   // const isSignup = true;
   const [isSignup, setIsSignUp] = useState(false);
 
+  const [formData, setFormData] = useState(initialState);
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
-  const HandleSubmit = () => {};
-  const handleChange = () => {};
+
+  const HandleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const googleSucess = async (res) => {
     const result = jwtDecode(res?.credential);
