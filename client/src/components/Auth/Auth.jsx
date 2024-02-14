@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
+import { signin, signup } from "../../actions/auth";
 
 const initialState = {
   firstName: "",
@@ -40,7 +41,12 @@ const Auth = () => {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    if (isSignup) {
+      dispatch(signup(formData, navigate));
+    } else {
+      dispatch(signin(formData, navigate));
+    }
   };
 
   const handleChange = (e) => {
