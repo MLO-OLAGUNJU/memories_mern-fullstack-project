@@ -50,6 +50,13 @@ const Auth = () => {
               name="email"
               label="Email Address"
               handleChange={handleChange}
+              type="email"
+            />
+            <Input
+              name="password"
+              label={"Password"}
+              handleChange={handleChange}
+              type={"password"}
             />
           </Grid>
         </form>
