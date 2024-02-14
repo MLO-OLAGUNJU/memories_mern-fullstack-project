@@ -10,6 +10,8 @@ import {
 import useStyles from "./styles";
 import { MdLockOutline } from "react-icons/md";
 
+import Input from "./Input";
+
 const Auth = () => {
   const classes = useStyles();
   const isSignup = false;
@@ -28,27 +30,27 @@ const Auth = () => {
           <Grid container spacing={2}>
             {isSignup && (
               <>
-                <Grid xs={6} md={12}>
-                  <TextField
-                    name="firstName"
-                    label="First Name"
-                    handleChange={handleChange}
-                    autoFocus
-                    xs={6}
-                  />
-                </Grid>
+                <Input
+                  name="firstName"
+                  label="First Name"
+                  handleChange={handleChange}
+                  autoFocus
+                  half
+                />
 
-                <Grid xs={6} md={12}>
-                  <TextField
-                    name="lastName"
-                    label="Last Name"
-                    handleChange={handleChange}
-                    autoFocus
-                    xs={6}
-                  />
-                </Grid>
+                <Input
+                  name="lastName"
+                  label="Last Name"
+                  handleChange={handleChange}
+                  half
+                />
               </>
             )}
+            <Input
+              name="email"
+              label="Email Address"
+              handleChange={handleChange}
+            />
           </Grid>
         </form>
       </Paper>
