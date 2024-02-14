@@ -37,13 +37,16 @@ const Auth = () => {
                     xs={6}
                   />
                 </Grid>
-                <TextField
-                  name="lastName"
-                  label="Last Name"
-                  handleChange={handleChange}
-                  autoFocus
-                  xs={6}
-                />
+
+                <Grid xs={6} md={12}>
+                  <TextField
+                    name="lastName"
+                    label="Last Name"
+                    handleChange={handleChange}
+                    autoFocus
+                    xs={6}
+                  />
+                </Grid>
               </>
             )}
           </Grid>
