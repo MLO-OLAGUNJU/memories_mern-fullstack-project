@@ -11,14 +11,15 @@ import useStyles from "./styles";
 import { MdLockOutline } from "react-icons/md";
 
 import Input from "./Input";
-import { useState } from "react";
 
 const Auth = () => {
   const classes = useStyles();
-  const isSignup = false;
+  const isSignup = true;
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const handleShowPassword = () =>
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   const HandleSubmit = () => {};
   const handleChange = () => {};
 
@@ -59,9 +60,27 @@ const Auth = () => {
               name="password"
               label={"Password"}
               handleChange={handleChange}
-              type={"password"}
+              type={!showPassword ? "password" : "text"}
+              handleShowPassword={handleShowPassword}
             />
+            {isSignup && (
+              <Input
+                name={"confirmPassword"}
+                label="Repeat Password"
+                handleChange={handleChange}
+                type={"password"}
+              />
+            )}
           </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            {isSignup ? "Sign Up" : "Sign In"}
+          </Button>
         </form>
       </Paper>
     </Container>
