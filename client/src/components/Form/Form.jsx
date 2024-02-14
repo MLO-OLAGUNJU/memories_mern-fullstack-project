@@ -118,6 +118,7 @@ const Form = ({ currentId, setCurrentId }) => {
             Submit
           </Button>
           <Button
+            style={{ marginTop: "10px" }}
             variant="contained"
             color="secondary"
             size="small"

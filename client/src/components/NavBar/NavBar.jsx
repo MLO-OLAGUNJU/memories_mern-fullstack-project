@@ -3,33 +3,29 @@ import { AppBar, Typography, Toolbar, Avatar, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import jwt_decode from "jwt-decode";
-
+import { useNavigate, useLocation } from "react-router-dom";
 import memories from "../../images/memories.png";
 import * as actionType from "../../constants/actionTypes";
 import useStyles from "./styles";
 
 const Navbar = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const classes = useStyles();
-
-  const logout = () => {
-    dispatch({ type: actionType.LOGOUT });
-    setUser(null);
-  };
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const token = user?.token;
 
-    if (token) {
-      const decodedToken = jwt_decode(token);
-
-      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-    }
-
+    //JWT ...
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, []);
+  }, [location]);
 
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+  };
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>

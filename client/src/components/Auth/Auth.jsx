@@ -9,12 +9,18 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 import { MdLockOutline } from "react-icons/md";
-
+import { GoogleLogin } from "react-google-login";
 import Input from "./Input";
+import Icon from "./icon";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
+  const navigate = useNavigate();
   const classes = useStyles();
-  const isSignup = true;
+  const dispatch = useDispatch();
+  // const isSignup = true;
+  const [isSignup, setIsSignUp] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,6 +28,27 @@ const Auth = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   const HandleSubmit = () => {};
   const handleChange = () => {};
+  const googleSucess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    try {
+      dispatch({ type: "AUTH", data: { result, token } });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const googleFailure = (error) => {
+    console.log(error);
+    console.log("Google Sign In was unsuccessful, Try Again Later!");
+  };
+
+  const SwitchMode = () => {
+    // isSignup ? setIsSignUp(false) : setIsSignUp(true);
+    setIsSignUp((prevIsSignUp) => !prevIsSignUp);
+    handleShowPassword(false);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -81,6 +108,37 @@ const Auth = () => {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
+          <GoogleLogin
+            clientId="649637207925-uoousgrg8ev0tgcdk614fhfd1phob6rb.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <Button
+                className={classes.googleButton}
+                color="primary"
+                fullWidth
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                startIcon={<Icon />}
+                variant="contained"
+              >
+                Sign In with Google
+              </Button>
+            )}
+            onSuccess={googleSucess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin"
+          />
+          <Grid container justify="center">
+            <Grid item>
+              <Button
+                style={{ textDecoration: "underline" }}
+                onClick={SwitchMode}
+              >
+                {isSignup
+                  ? "New to Memories? Sign Up"
+                  : "Have a Memories Account already?"}
+              </Button>
+            </Grid>
+          </Grid>
         </form>
       </Paper>
     </Container>
