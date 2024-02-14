@@ -24,7 +24,7 @@ const Navbar = () => {
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
-    navigate("/");
+    navigate("/auth");
   };
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">

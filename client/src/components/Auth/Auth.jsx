@@ -9,11 +9,13 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 import { MdLockOutline } from "react-icons/md";
-import { GoogleLogin } from "react-google-login";
+// import { GoogleLogin } from "react-google-login";
 import Input from "./Input";
 import Icon from "./icon";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import jwtDecode from "jwt-decode";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -28,8 +30,9 @@ const Auth = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   const HandleSubmit = () => {};
   const handleChange = () => {};
+
   const googleSucess = async (res) => {
-    const result = res?.profileObj;
+    const result = jwtDecode(res?.credential);
     const token = res?.tokenId;
 
     try {
@@ -127,6 +130,7 @@ const Auth = () => {
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
           />
+
           <Grid container justify="center">
             <Grid item>
               <Button
