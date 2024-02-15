@@ -7,21 +7,28 @@ import Auth from "./components/Auth/Auth";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import PostDetails from "./components/PostDetails/PostDetails";
 
-const App = () => (
-  <GoogleOAuthProvider clientId="649637207925-uoousgrg8ev0tgcdk614fhfd1phob6rb.apps.googleusercontent.com">
-    <BrowserRouter>
-      <Container maxWidth="xl">
-        <Navbar />
-        <Routes>
-          <Route path="/" exact Component={() => <Navigate to="/posts" />} />
-          <Route path="/posts" exact element={<Home />} />
-          <Route path="/posts/search" exact element={<Home />} />
-          <Route path="/posts/:id" element={<PostDetails />} />
-          <Route path="/auth" exact element={<Auth />} />
-        </Routes>
-      </Container>
-    </BrowserRouter>
-  </GoogleOAuthProvider>
-);
+const App = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+  return (
+    <GoogleOAuthProvider clientId="649637207925-uoousgrg8ev0tgcdk614fhfd1phob6rb.apps.googleusercontent.com">
+      <BrowserRouter>
+        <Container maxWidth="xl">
+          <Navbar />
+          <Routes>
+            <Route path="/" exact Component={() => <Navigate to="/posts" />} />
+            <Route path="/posts" exact element={<Home />} />
+            <Route path="/posts/search" exact element={<Home />} />
+            <Route path="/posts/:id" element={<PostDetails />} />
+            <Route
+              path="/auth"
+              exact
+              Component={() => (!user ? <Auth /> : <Navigate to="/posts" />)}
+            />
+          </Routes>
+        </Container>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
+  );
+};
 
 export default App;
