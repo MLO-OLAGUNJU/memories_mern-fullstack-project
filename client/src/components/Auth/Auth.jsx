@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 import { signin, signup } from "../../actions/auth";
+import { AUTH } from "../../constants/actionTypes";
 
 const initialState = {
   firstName: "",
@@ -55,15 +56,17 @@ const Auth = () => {
 
   const googleSucess = async (res) => {
     const result = jwtDecode(res?.credential);
-    const token = res?.tokenId;
-
+    const tokenId = res?.tokenId || (res?.tokenObj && res?.tokenObj.id_token);
+    console.log("tokenId", tokenId);
     try {
-      dispatch({ type: "AUTH", data: { result, token } });
+      // const result = jwtDecode(tokenId);
+      dispatch({ type: AUTH, data: { result, token: tokenId } });
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
+
   const googleFailure = (error) => {
     console.log(error);
     console.log("Google Sign In was unsuccessful, Try Again Later!");
@@ -135,22 +138,23 @@ const Auth = () => {
           </Button>
           <GoogleLogin
             clientId="649637207925-uoousgrg8ev0tgcdk614fhfd1phob6rb.apps.googleusercontent.com"
-            render={(renderProps) => (
-              <Button
-                className={classes.googleButton}
-                color="primary"
-                fullWidth
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                startIcon={<Icon />}
-                variant="contained"
-              >
-                Sign In with Google
-              </Button>
-            )}
+            // render={(renderProps) => (
+            //   <Button
+            //     className={classes.googleButton}
+            //     color="primary"
+            //     fullWidth
+            //     onClick={renderProps.onClick}
+            //     disabled={renderProps.disabled}
+            //     startIcon={<Icon />}
+            //     variant="contained"
+            //   >
+            //     Sign In with Google
+            //   </Button>
+            // )}
             onSuccess={googleSucess}
             onFailure={googleFailure}
-            cookiePolicy="single_host_origin"
+            cookiePolicy={"single_host_origin"}
+            responseType="token id_token"
           />
 
           <Grid container justify="center">
