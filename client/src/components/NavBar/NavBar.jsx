@@ -26,6 +26,55 @@ const Navbar = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/auth");
   };
+
+  /////////////
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    // Load selected image from local storage based on the user's ID
+    const storedImage = localStorage.getItem(
+      `selectedImage_${user?.result?._id}`
+    );
+    if (storedImage) {
+      setSelectedImage(storedImage);
+    }
+  }, [user]);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageDataURL = reader.result;
+        setSelectedImage(imageDataURL);
+
+        // Save selected image URL to local storage with the user's ID
+        localStorage.setItem(
+          `selectedImage_${user?.result?._id}`,
+          imageDataURL
+        );
+
+        // Make API call to save selected image URL to backend
+        // saveProfileImage(user?.result?._id, imageDataURL)
+        //   .then((response) => {
+        //     // Handle the response if needed
+        //     console.log("Image saved to backend:", response.data);
+        //   })
+        //   .catch((error) => {
+        //     // Handle the error if needed
+        //     console.error("Error saving image to backend:", error);
+        //   });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleAvatarClick = () => {
+    document.getElementById("avatar-upload").click();
+  };
+
+  /////////////
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
@@ -43,13 +92,23 @@ const Navbar = () => {
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
           <div className={classes.profile}>
+            {/* Updated Avatar with image upload */}
+            <input
+              accept="image/*"
+              className={classes.input}
+              id="avatar-upload"
+              type="file"
+              onChange={handleImageChange}
+            />
             <Avatar
               className={classes.purple}
               alt={user?.result.name}
-              src={user?.result.picture}
+              src={selectedImage || user?.result.picture}
+              onClick={handleAvatarClick}
             >
               {user?.result.name.charAt(0)}
             </Avatar>
+
             <Typography className={classes.userName} variant="h6">
               {user?.result.name}
             </Typography>

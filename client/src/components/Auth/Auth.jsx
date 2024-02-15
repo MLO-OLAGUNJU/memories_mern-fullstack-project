@@ -159,7 +159,7 @@ const Auth = () => {
                 style={{ textDecoration: "underline" }}
                 onClick={SwitchMode}
               >
-                {isSignup
+                {!isSignup
                   ? "New to Memories? Sign Up"
                   : "Have a Memories Account already?"}
               </Button>
