@@ -16,6 +16,8 @@ import Paginate from "../Pagination";
 import { useNavigate, useLocation } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 
+import useStyles from "./styles";
+
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
@@ -23,10 +25,11 @@ const useQuery = () => {
 const Home = () => {
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
-  navigate = useNavigate();
+  const navigate = useNavigate();
   const query = useQuery();
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
+  const classes = useStyles();
 
   useEffect(() => {
     dispatch(getPosts());
