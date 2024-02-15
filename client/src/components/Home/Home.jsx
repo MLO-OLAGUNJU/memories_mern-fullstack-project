@@ -41,7 +41,16 @@ const Home = () => {
     //if(e.key=== "Enter")
     if (e.keyCode === 13) {
       e.preventDefault();
+      searchPost();
       //search post
+    }
+  };
+
+  const searchPost = () => {
+    if (search.trim()) {
+      dispatch(getPosts(search, tags, page));
+    } else {
+      navigate("/");
     }
   };
 
@@ -86,6 +95,14 @@ const Home = () => {
                 label="Search Tags"
                 variant="outlined"
               />
+              <Button
+                onClick={searchPost}
+                className={classes.searchButton}
+                color="primary"
+                variant="contained"
+              >
+                Search
+              </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
