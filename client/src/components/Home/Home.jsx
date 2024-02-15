@@ -44,6 +44,12 @@ const Home = () => {
       //search post
     }
   };
+
+  const handleAdd = (tag) => setTags([...tags, tag]);
+
+  const handleDelete = (tagToDelete) =>
+    setTags(tags.filter((tag) => tag !== tagToDelete));
+
   return (
     <Grow in>
       <Container maxWidth="xl">
@@ -76,7 +82,7 @@ const Home = () => {
                 style={{ margin: "10px 0" }}
                 value={tags}
                 onAdd={handleAdd}
-                onDelete={handledelete}
+                onDelete={handleDelete}
                 label="Search Tags"
                 variant="outlined"
               />
