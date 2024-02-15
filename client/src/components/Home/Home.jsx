@@ -33,17 +33,32 @@ const Home = () => {
   }, [currentId, dispatch]);
   return (
     <Grow in>
-      <Container>
+      <Container maxWidth="xl">
         <Grid
+          className={classes.gridContainer}
           container
           justify="space-between"
           alignItems="stretch"
           spacing={3}
         >
-          <Grid item xs={12} sm={7}>
+          <Grid item xs={12} sm={6} md={9}>
             <Posts setCurrentId={setCurrentId} />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6} md={3}>
+            <AppBar
+              className={classes.appBarSearch}
+              position="static"
+              color="inherit"
+            >
+              <TextField
+                name="search"
+                variant="outlined"
+                label="Search Memories"
+                fullWidth
+                value="TEST"
+                onChange={() => {}}
+              />
+            </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
               <Paginate />
