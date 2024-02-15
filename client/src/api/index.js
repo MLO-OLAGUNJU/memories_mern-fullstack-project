@@ -9,5 +9,5 @@ export const updatePost = (id, updatedPost) =>
   axios.patch(`/posts/${id}`, updatedPost);
 export const deletePost = (id) => axios.delete(`/posts/${id}`);
 
-export const signin = (FormData) => API.post("/users/signin", FormData);
-export const signup = (FormData) => API.post("/users/signup", FormData);
+export const signIn = (formData) => API.post("/users/signin", formData);
+export const signUp = (formData) => API.post("/users/signup", formData);
