@@ -30,10 +30,20 @@ const Home = () => {
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
   const classes = useStyles();
+  const [search, setSearch] = useState("");
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     dispatch(getPosts());
   }, [currentId, dispatch]);
+
+  const handleKeyPress = (e) => {
+    //if(e.key=== "Enter")
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      //search post
+    }
+  };
   return (
     <Grow in>
       <Container maxWidth="xl">
@@ -58,8 +68,17 @@ const Home = () => {
                 variant="outlined"
                 label="Search Memories"
                 fullWidth
-                value="TEST"
-                onChange={() => {}}
+                onKeyPress={handleKeyPress}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <ChipInput
+                style={{ margin: "10px 0" }}
+                value={tags}
+                onAdd={handleAdd}
+                onDelete={handledelete}
+                label="Search Tags"
+                variant="outlined"
               />
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
