@@ -23,21 +23,23 @@ const Post = ({ post, setCurrentId }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const Likes = () => {
-    if (post.likes.length > 0) {
+    const likesCount = post.likes?.length ?? 0;
+
+    if (likesCount > 0) {
       return post.likes.find(
         (like) => like === (user?.result?.googleId || user?.result?._id)
       ) ? (
         <>
           <MdThumbUp fontSize="small" />
           &nbsp;
-          {post.likes.length > 2
-            ? `You and ${post.likes.length - 1} others`
-            : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+          {likesCount > 2
+            ? `You and ${likesCount - 1} others`
+            : `${likesCount} like${likesCount > 1 ? "s" : ""}`}
         </>
       ) : (
         <>
           <MdOutlineThumbUpAlt fontSize="small" />
-          &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
+          &nbsp;{likesCount} {likesCount === 1 ? "Like" : "Likes"}
         </>
       );
     }

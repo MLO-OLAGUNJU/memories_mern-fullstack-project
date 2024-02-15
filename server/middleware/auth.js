@@ -10,8 +10,6 @@ const auth = async (req, res, next) => {
       return res.status(401).json({ message: "Authorization token missing" });
     }
 
-    console.log("Received token:", token);
-
     let decodedData;
 
     if (token.length < 500) {
