@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardActions,
@@ -26,31 +26,41 @@ const Post = ({ post, setCurrentId }) => {
 
   const navigate = useNavigate();
 
-  const Likes = () => {
-    const likesCount = post.likes?.length ?? 0;
+  const [likes, setLikes] = useState(post?.likes);
+  const userId = user?.result.googleId || user?.result?._id;
+  const hasLikedPost = post?.likes?.find((like) => like === userId);
 
-    if (likesCount > 0) {
-      return post.likes.find(
-        (like) => like === (user?.result?.googleId || user?.result?._id)
-      ) ? (
+  const handleLike = async () => {
+    dispatch(likePost(post._id));
+
+    if (hasLikedPost) {
+      setLikes(post.likes.filter((id) => id !== userId));
+    } else {
+      setLikes([...post.likes, userId]);
+    }
+  };
+
+  const Likes = () => {
+    if (likes.length > 0) {
+      return likes.find((like) => like === userId) ? (
         <>
-          <MdThumbUp fontSize="15px" />
+          <MdThumbUp fontSize="small" />
           &nbsp;
-          {likesCount > 2
-            ? `You and ${likesCount - 1} others`
-            : `${likesCount} like${likesCount > 1 ? "s" : ""}`}
+          {likes.length > 2
+            ? `You and ${likes.length - 1} others`
+            : `${likes.length} like${likes.length > 1 ? "s" : ""}`}
         </>
       ) : (
         <>
-          <MdOutlineThumbUpAlt fontSize="15px" />
-          &nbsp;{likesCount} {likesCount === 1 ? "Like" : "Likes"}
+          <MdOutlineThumbUpAlt fontSize="small" />
+          &nbsp;{likes.length} {likes.length === 1 ? "Like" : "Likes"}
         </>
       );
     }
 
     return (
       <>
-        <MdOutlineThumbUpAlt fontSize="15px" />
+        <MdOutlineThumbUpAlt fontSize="small" />
         &nbsp;Like
       </>
     );
@@ -115,7 +125,7 @@ const Post = ({ post, setCurrentId }) => {
           size="small"
           color="primary"
           disabled={!user?.result}
-          onClick={() => dispatch(likePost(post._id))}
+          onClick={handleLike}
         >
           <Likes />
         </Button>
