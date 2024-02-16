@@ -10,7 +10,7 @@ const CommentSection = ({ post }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const inputRef = useRef(null);
-  const classes = useStyles();
+  //   const classes = useStyles();
   const [comments, setComments] = useState([1, 2, 3, 4]);
   const [comment, setComment] = useState("");
 
