@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { getPosts, getPostBySearch } from "../../actions/posts";
-import Paginate from "../Pagination";
+import Pagination from "../Pagination";
 import { useNavigate, useLocation } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 
@@ -33,16 +33,10 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
-
   const handleKeyPress = (e) => {
     //if(e.key=== "Enter")
     if (e.keyCode === 13) {
-      // e.preventDefault();
       searchPost();
-      //search post
     }
   };
 
@@ -109,7 +103,7 @@ const Home = () => {
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
-              <Paginate />
+              <Pagination page={page} />
             </Paper>
           </Grid>
         </Grid>
