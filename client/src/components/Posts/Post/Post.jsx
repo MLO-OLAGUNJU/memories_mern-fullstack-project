@@ -34,7 +34,7 @@ const Post = ({ post, setCurrentId }) => {
         (like) => like === (user?.result?.googleId || user?.result?._id)
       ) ? (
         <>
-          <MdThumbUp fontSize="small" />
+          <MdThumbUp fontSize="15px" />
           &nbsp;
           {likesCount > 2
             ? `You and ${likesCount - 1} others`
@@ -42,7 +42,7 @@ const Post = ({ post, setCurrentId }) => {
         </>
       ) : (
         <>
-          <MdOutlineThumbUpAlt fontSize="small" />
+          <MdOutlineThumbUpAlt fontSize="15px" />
           &nbsp;{likesCount} {likesCount === 1 ? "Like" : "Likes"}
         </>
       );
@@ -50,7 +50,7 @@ const Post = ({ post, setCurrentId }) => {
 
     return (
       <>
-        <MdOutlineThumbUpAlt fontSize="small" />
+        <MdOutlineThumbUpAlt fontSize="15px" />
         &nbsp;Like
       </>
     );
@@ -79,7 +79,10 @@ const Post = ({ post, setCurrentId }) => {
           user?.result?._id === post?.creator) && (
           <div className={classes.overlay2}>
             <Button
-              onClick={() => setCurrentId(post._id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentId(post._id);
+              }}
               style={{ color: "white" }}
               size="small"
             >
@@ -119,11 +122,17 @@ const Post = ({ post, setCurrentId }) => {
         {(user?.result?.googleId === post?.creator ||
           user?.result?._id === post?.creator) && (
           <Button
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
             size="small"
             color="secondary"
             onClick={() => dispatch(deletePost(post._id))}
           >
-            <MdDeleteForever fontSize="small" /> Delete
+            <MdDeleteForever fontSize="15px" /> &nbsp;
+            <span style={{ marginTop: "3px" }}>Delete</span>
           </Button>
         )}
       </CardActions>
