@@ -20,7 +20,9 @@ const CommentSection = ({ post }) => {
 
   const HandleClick = () => {
     const finalComment = `${user.result.name}: ${comment}`;
-    dispatch(commentPost(finalComment, post._id)); // Corrected dispatch function
+    dispatch(commentPost(finalComment, post._id));
+
+    setComment("");
   };
 
   return (
