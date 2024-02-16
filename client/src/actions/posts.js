@@ -5,38 +5,43 @@ import {
   UPDATE,
   DELETE,
   FETCH_BY_SEARCH,
+  END_LOADING,
+  START_LOADING,
 } from "../constants/actionTypes";
 
 //Action Creators
 export const getPosts = (page) => async (dispatch) => {
+  dispatch({ type: START_LOADING });
   try {
     const { data } = await api.fetchPosts(page);
-
-    console.log(data);
-
     dispatch({ type: FETCH_ALL, payload: data });
+    dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error.message);
   }
 };
 
 export const getPostBySearch = (searchQuery) => async (dispatch) => {
+  dispatch({ type: START_LOADING });
   try {
     const {
       data: { data },
     } = await api.fetchPostsBySearch(searchQuery);
 
     dispatch({ type: FETCH_BY_SEARCH, payload: data });
+    dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
   }
 };
 
 export const createPost = (post) => async (dispatch) => {
+  dispatch({ type: START_LOADING });
   try {
     const { data } = await api.createPost(post);
 
     dispatch({ type: CREATE, payload: data });
+    dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error.message);
   }
