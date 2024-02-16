@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useStyles from "./styles";
 import { commentPost } from "../../actions/posts";
 
-const CommentSection = ({ post }) => {
+// const CommentSection = ({ post }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const inputRef = useRef(null);
