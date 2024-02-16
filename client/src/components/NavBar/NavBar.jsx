@@ -95,6 +95,7 @@ const Navbar = () => {
           <div className={classes.profile}>
             {/* Updated Avatar with image upload */}
             <input
+              style={{ display: "none" }}
               accept="image/*"
               className={classes.input}
               id="avatar-upload"
@@ -102,6 +103,7 @@ const Navbar = () => {
               onChange={handleImageChange}
             />
             <Avatar
+              style={{ cursor: "pointer" }}
               className={classes.purple}
               alt={user?.result.name}
               src={selectedImage || user?.result.picture}
