@@ -40,7 +40,7 @@ const Home = () => {
   const handleKeyPress = (e) => {
     //if(e.key=== "Enter")
     if (e.keyCode === 13) {
-      e.preventDefault();
+      // e.preventDefault();
       searchPost();
       //search post
     }
@@ -50,7 +50,7 @@ const Home = () => {
     if (search.trim() || tags) {
       dispatch(getPostBySearch({ search, tags: tags.join(",") }));
       navigate(
-        `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
+        `/posts/search?searchQuery=${search || "none"}&tags={${tags.join(",")}}`
       );
     } else {
       navigate("/");
