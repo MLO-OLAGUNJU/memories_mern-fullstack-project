@@ -17,7 +17,7 @@ const CommentSection = ({ post }) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const HandleClick = () => {
-    // const finalComment = `${user.result.name}: ${comment}`;
+    const finalComment = `${user.result.name}: ${comment}`;
     dispatchEvent(commentPost(finalComment, post._id));
   };
 
