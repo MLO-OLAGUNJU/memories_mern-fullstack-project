@@ -5,14 +5,26 @@ import {
   UPDATE,
   DELETE,
   FETCH_BY_SEARCH,
+  FETCH_POST,
   END_LOADING,
   START_LOADING,
 } from "../constants/actionTypes";
 
 //Action Creators
-export const getPosts = (page) => async (dispatch) => {
-  dispatch({ type: START_LOADING });
+export const getPost = (id) => async (dispatch) => {
   try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.fetchPost(id);
+    dispatch({ type: FETCH_POST, payload: data });
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const getPosts = (page) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
     const { data } = await api.fetchPosts(page);
     dispatch({ type: FETCH_ALL, payload: data });
     dispatch({ type: END_LOADING });
@@ -22,8 +34,8 @@ export const getPosts = (page) => async (dispatch) => {
 };
 
 export const getPostBySearch = (searchQuery) => async (dispatch) => {
-  dispatch({ type: START_LOADING });
   try {
+    dispatch({ type: START_LOADING });
     const {
       data: { data },
     } = await api.fetchPostsBySearch(searchQuery);
@@ -36,8 +48,8 @@ export const getPostBySearch = (searchQuery) => async (dispatch) => {
 };
 
 export const createPost = (post) => async (dispatch) => {
-  dispatch({ type: START_LOADING });
   try {
+    dispatch({ type: START_LOADING });
     const { data } = await api.createPost(post);
 
     dispatch({ type: CREATE, payload: data });
